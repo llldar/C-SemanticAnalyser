@@ -12,11 +12,12 @@
 #include <vector>
 #include <iostream>
 class node{
-    std::vector<std::string> attributes;
-    std::vector<std::string> values;
-    std::vector<node> childs;
     
 public:
+    std::vector<std::string> attributes;
+    std::vector<node> childs;
+    std::vector<std::string> values;
+    
     void add_attribute(std::string attribute);
     void add_value(std::string value);
     void add_child(node n);
