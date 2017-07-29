@@ -30,10 +30,12 @@ public:
 
 class XML{
     std::string header;
+    std::string sub_header;
     std::vector<node> childs;
     
 public:
     void add_child(node n);
+    void set_sub_header(std::string s);
     void print_all(std::string xml_name);
     XML();
 };

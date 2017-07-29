@@ -8,7 +8,13 @@
 
 #ifndef Symbol_table_h
 #define Symbol_table_h
+#include "XML_header.h"
 
-#include <stdio.h>
+extern node global_symbol_table;
+
+void build_symbol_table(node root,node &father_table);
+void add_attr(node &root,std::string name,std::string type);
+
+bool exist_in_table(std::string s,node t);
 
 #endif /* Symbol_table_h */

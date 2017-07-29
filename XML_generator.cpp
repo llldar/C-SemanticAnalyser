@@ -10,6 +10,11 @@
 
 XML::XML():header("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"){}
 
+void XML::set_sub_header(std::string s)
+{
+    sub_header = s;
+}
+
 void XML::add_child(node n)
 {
     childs.push_back(n);
@@ -18,12 +23,12 @@ void XML::add_child(node n)
 void XML::print_all(std::string xml_name)
 {
     std::cout<<header<<std::endl;
-    std::cout<<"<AbstractSyntaxTree name=\""<<xml_name<<"\">"<<std::endl;
+    std::cout<<"<"<<sub_header<<" name=\""<<xml_name<<"\">"<<std::endl;
     for(node n:childs)
     {
         n.print(1);
     }
-    std::cout<<"</AbstractSyntaxTree>"<<std::endl;
+    std::cout<<"</"<<sub_header<<">"<<std::endl;
 }
 
 void node::add_attribute(std::string attribute)

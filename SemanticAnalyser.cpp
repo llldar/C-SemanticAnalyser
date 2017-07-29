@@ -9,6 +9,7 @@
 #include <iostream>
 #include "XML_header.h"
 #include "SemanticAnalyser.h"
+#include "Symbol_table.h"
 int main(int argc, const char * argv[]) {
     if (argc != 3) {
         std::cerr<<"Usage: "<<argv[0]<<" <input xml filename> <output xml filename>"<<std::endl;
@@ -23,8 +24,13 @@ int main(int argc, const char * argv[]) {
     remove_empty(root);
     reduce_single(root);
     
+    global_symbol_table.add_attribute("GLOBAL_SYMBOL_TABLE");
+    build_symbol_table(root,global_symbol_table);
+    
     XML xml;
+    xml.set_sub_header("AbstractSyntaxTree");
     xml.add_child(root);
+    xml.add_child(global_symbol_table);
     xml.print_all(argv[2]);
     return 0;
 }
