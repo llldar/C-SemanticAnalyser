@@ -13,7 +13,7 @@
 extern node global_symbol_table;
 
 void build_symbol_table(node root,node &father_table);
-void add_attr(node &root,std::string name,std::string type,int id);
+void add_attr(node &root,std::string name,std::string type,std::string id);
 
 bool exist_in_table(std::string s,node t);
 

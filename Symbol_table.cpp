@@ -10,7 +10,7 @@
 
 node global_symbol_table;
 int val_num = 0;
-
+int para_num = 0;
 void build_symbol_table(node root,node &father_table)
 {
 //    std::cerr<<"Building: "<<root.attributes[0]<<std::endl;
@@ -20,7 +20,7 @@ void build_symbol_table(node root,node &father_table)
         node temp_table;
         temp_table.add_attribute("func");
         if (root.childs[0].values.size() > 0 && root.childs[1].values.size() > 0) {
-            add_attr(temp_table, root.childs[1].values[0], root.childs[0].values[0],val_num++);
+            add_attr(temp_table, root.childs[1].values[0], root.childs[0].values[0],root.childs[1].values[0]);
 //            std::cerr<<root.childs[1].values[0]<<" Added"<<std::endl;
         }else{
             std::cerr<<"Unexpected function format near "<<\
@@ -38,7 +38,7 @@ void build_symbol_table(node root,node &father_table)
         node temp;
         temp.add_attribute("var");
         if (root.childs[0].values.size() > 0 && root.childs[1].values.size() > 0){
-            add_attr(temp, root.childs[1].values[0], root.childs[0].values[0],val_num++);
+            add_attr(temp, root.childs[1].values[0], root.childs[0].values[0],"vid_"+std::to_string(val_num++));
 //            std::cerr<<root.childs[1].values[0]<<" Added"<<std::endl;
         }else{
             std::cerr<<"Unexpected variable format near "<<\
@@ -51,7 +51,7 @@ void build_symbol_table(node root,node &father_table)
         node temp;
         temp.add_attribute("param");
         if (root.childs[0].values.size() > 0 && root.childs[1].values.size() > 0){
-            add_attr(temp, root.childs[1].values[0], root.childs[0].values[0],val_num++);
+            add_attr(temp, root.childs[1].values[0], root.childs[0].values[0],"pid_"+std::to_string(para_num++));
 //            std::cerr<<root.childs[1].values[0]<<" Added"<<std::endl;
         }else{
             std::cerr<<"Unexpected parameter format near "<<\
@@ -85,7 +85,7 @@ bool exist_in_table(std::string s,node t){
     return res;
 }
 
-void add_attr(node &root,std::string name,std::string type,int id)
+void add_attr(node &root,std::string name,std::string type,std::string id)
 {
     node temp1,temp2,temp3;
     temp1.add_attribute("name");
@@ -93,7 +93,7 @@ void add_attr(node &root,std::string name,std::string type,int id)
     temp3.add_attribute("id");
     temp1.add_value(name);
     temp2.add_value(type);
-    temp3.add_value(std::to_string(id));
+    temp3.add_value(id);
     root.add_child(temp1);
     root.add_child(temp2);
     root.add_child(temp3);
